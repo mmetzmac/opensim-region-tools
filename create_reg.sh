@@ -5,7 +5,9 @@
 
 source config/reg.cfg
 UUID=$(uuidgen)
-RegionName=$1
+RegionName=$2
+RegionNameLower="$RegionName" | tr '[:upper:]' '[:lower:]'
+Port=$3
 
 clear
 
@@ -24,3 +26,30 @@ echo "Path for OpenSim LOG directory: $OpenSim_Log"
 echo "Path for OpenSim DB directory: $OpenSim_Db"
 echo""
 echo "The following UUID will be used for the new Region: $UUID"
+echo "The following port will be used: $Port"
+echo "Directory to be created in $OpenSim_Land: $RegionNameLower"
+
+case $1 in
+
+	list)
+	ls -al $OpenSim_Land
+	
+	echo "NOTE: it will be tested whether a Region exists or not"
+	;;
+	create)
+	if [ -d $OpenSim_Land/$RegionNameLower ] ; then 
+ 		echo ""
+		echo "verzeichnis vorhanden"
+ 	else
+ 		mkdir $OpenSim_Land/$RegionNameLower
+ 	fi
+	
+	
+	;;
+	delete)
+	;;
+	config)
+	;;
+
+*)
+esac
