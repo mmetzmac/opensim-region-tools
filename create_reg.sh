@@ -6,7 +6,7 @@
 source config/reg.cfg
 UUID=$(uuidgen)
 RegionName=$2
-RegionNameLower="$RegionName" | tr '[:upper:]' '[:lower:]'
+RegionNameLower=${RegionName,,}
 Port=$3
 
 clear
