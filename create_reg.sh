@@ -6,7 +6,7 @@
 source config/reg.cfg
 UUID=$(uuidgen)
 RegionName=$2
-RegionNameLower=${RegionName,,}
+RegionNameFileSys=${RegionName,,}
 Port=$3
 
 clear
@@ -27,29 +27,46 @@ echo "Path for OpenSim DB directory: $OpenSim_Db"
 echo""
 echo "The following UUID will be used for the new Region: $UUID"
 echo "The following port will be used: $Port"
-echo "Directory to be created in $OpenSim_Land: $RegionNameLower"
+echo ""
+echo "Directory to be created in $OpenSim_Land: $RegionNameFileSys"
+echo "Region in Simulation will be named: $RegionName"
+echo ""
 
+read -p "Übernehmen (j/n)? " response
+
+if [ "$response" == "j" ]; then
+
+        if [ -d $OpenSim_Land/$RegionNameFileSys ] ; then
+                echo ""
+                echo "Directory existing - will abort the operation"
+		echo ""
+                echo "PLEASE CHOOSE A REGION NAME, WICH DOES NOR EXIST ON THIS SERVER"
+		echo ""
+		exit
+        else
+                echo""
+		echo "$OpenSim_Land/$RegionNameFileSys will be created in $OpenSim_Land"
+		echo "Region will be found by searching $RegionName in Opensimulatior Viewer"
+		echo""
+	
 case $1 in
 
 	list)
 	ls -al $OpenSim_Land
-	
 	echo "NOTE: it will be tested whether a Region exists or not"
 	;;
+
 	create)
-	if [ -d $OpenSim_Land/$RegionNameLower ] ; then 
- 		echo ""
-		echo "verzeichnis vorhanden"
- 	else
- 		mkdir $OpenSim_Land/$RegionNameLower
- 	fi
-	
-	
+	mkdir $OpenSim_Land/$RegionNameFileSys
 	;;
+
 	delete)
 	;;
+
 	config)
 	;;
 
 *)
 esac
+fi
+fi
