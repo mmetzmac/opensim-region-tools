@@ -1,29 +1,12 @@
-# README #
+### OpenSim Region Tools ###
 
-This README would normally document whatever steps are necessary to get your application up and running.
-
-### What is this repository for? ###
-
-* Quick summary
-* Version
-* [Learn Markdown](https://bitbucket.org/tutorials/markdowndemo)
+In this repository are the tools, needed to setup new Regions and connect them to a Grid. The setup of the grid connection is not part of this toolset.
 
 ### How do I get set up? ###
 
-* Summary of set up
 * Configuration
+edit the file config/reg.cfg. This file represents the paths of your OpenSimulator setup. It is essential, that you finnish every path with a slash!
 * Dependencies
+Opensimulator, Mono, monit, bash
 * Database configuration
-* How to run tests
-* Deployment instructions
-
-### Contribution guidelines ###
-
-* Writing tests
-* Code review
-* Other guidelines
-
-### Who do I talk to? ###
-
-* Repo owner or admin
-* Other community or team contact
+none
