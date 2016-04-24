@@ -60,15 +60,18 @@ echo ""
 						mkdir $OpenSim_Land/$RegionNameFileSys
 						mkdir  $OpenSim_Land/$RegionNameFileSys/Regions
 						touch  $OpenSim_Land/$RegionNameFileSys/OpenSim.ini
-						echo "[Startup]
+						
+echo "[Startup]
 PIDFile = $OpenSim_Pid
 regionload_regionsdir =  $OpenSim_Land/$RegionNameFileSys/Regions/
 Stats_URI = "jsonSimStats"
 
 [Network]
 http_listener_port = $3" >> $OpenSim_Land/$RegionNameFileSys/OpenSim.ini
-						touch  $OpenSim_Land/$RegionNameFileSys/OpenSim.exe.config
-						echo "<?xml version="1.0" encoding="utf-8" ?>
+
+touch  $OpenSim_Land/$RegionNameFileSys/OpenSim.exe.config
+
+echo "<?xml version="1.0" encoding="utf-8" ?>
 <configuration>
   <configSections>
     <section name="log4net" type="log4net.Config.Log4NetConfigurationSectionHandler,log4net" />
@@ -116,8 +119,10 @@ http_listener_port = $3" >> $OpenSim_Land/$RegionNameFileSys/OpenSim.ini
 
   </log4net>
 </configuration>" >> $OpenSim_Land/$RegionNameFileSys/OpenSim.exe.config
-						touch  $OpenSim_Land/$RegionNameFileSys/Regions/Regions.ini
-						echo "[$RehionName]
+
+touch  $OpenSim_Land/$RegionNameFileSys/Regions/Regions.ini
+
+echo "[$RehionName]
 RegionUUID = $UUID
 Location = $4
 InternalAddress = 0.0.0.0
@@ -143,4 +148,3 @@ MaxAgents = 40" >> $OpenSim_Land/$RegionNameFileSys/Regions/Regions.ini
 
 			*)
 		esac
-
