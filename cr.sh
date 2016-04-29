@@ -1,9 +1,11 @@
+
 #!/bin/bash
 
 # Script to create regions
 # more descriptions here
 
 source config/reg.cfg
+Date=`date +"%d.%m.%Y"`
 UUID=$(uuidgen)
 RegionName=$2
 RegionNameFileSys=${RegionName,,}
@@ -37,6 +39,7 @@ echo "Path for OpenSim DB directory: $OpenSim_Db"
 echo""
 echo "The following UUID will be used for the new Region: $UUID"
 echo "The following port will be used: $Port"
+echo "The following coordinates will be used: $Coordinates"
 echo ""
 echo "Directory to be created in $OpenSim_Land: $RegionNameFileSys"
 echo "Region in Simulation will be named: $RegionName"
@@ -134,6 +137,11 @@ ExternalHostName = SYSTEMIP
 RegionType = "Mainland"
 MaxPrims = 45000
 MaxAgents = 40" >> $OpenSim_Land/$RegionNameFileSys/Regions/Regions.ini
+
+echo "$Coordinates" >> data/coordinates.txt
+echo "$Port" >> data/ports.txt
+echo "$RegionName" >> data/land.txt
+echo "$Date: $RegionName $RegionNameFileSys $Coordinates $Port" >> data/regioninfo.txt
 
 					fi
 				else
