@@ -44,6 +44,8 @@ echo ""
 echo "Directory to be created in $OpenSim_Land: $RegionNameFileSys"
 echo "Region in Simulation will be named: $RegionName"
 echo ""
+echo "Lofiles will be stored in $OpenSim_Log as $RegionName.log"
+echo ""
 				read -p "Übernehmen (j/n)? " response
 
 				if [ "$response" == "j" ]; then
