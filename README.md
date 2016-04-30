@@ -4,6 +4,6 @@ In this repository are the tools, needed to setup new Regions and connect them t
 
 ### How do I get set up? ###
 
-* **Configuratio**n: edit the file config/reg.cfg. This file represents the paths of your OpenSimulator setup. It is essential, that you finnish every path with a slash!
+* **Configuratio**n: edit the file config/reg.cfg. This file represents the paths of your OpenSimulator setup.
 * **Dependencies**: Opensimulator, Mono, monit, bash
 * **Database configuration**: none
