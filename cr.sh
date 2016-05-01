@@ -1,16 +1,24 @@
-
 #!/bin/bash
 
 # Script to create regions
 # more descriptions here
 
 source config/reg.cfg
-Date=`date +"%d.%m.%Y"`
+Date=`date +"%d.%m.%Y - %h:%m"`
 UUID=$(uuidgen)
 RegionName=$2
 RegionNameFileSys=${RegionName,,}
 Port=$3
 Coordinates=$4
+
+export RegionName
+export RegionNameFileSys
+export Port
+export Coordinates
+export UUID
+export OpenSim_Pid
+export OpenSim_Land
+export OpenSim_Log
 
 clear
 
@@ -64,86 +72,30 @@ echo ""
                         echo "Please remember to add the Name $RegionNameFileSys to the instances section of"
 			echo "/home/opensim/bin/os scripts"
 			echo""
-						mkdir $OpenSim_Land/$RegionNameFileSys
-						mkdir  $OpenSim_Land/$RegionNameFileSys/Regions
-						touch  $OpenSim_Land/$RegionNameFileSys/OpenSim.ini
-
-echo "[Startup]
-PIDFile = $OpenSim_Pid
-regionload_regionsdir =  $OpenSim_Land/$RegionNameFileSys/Regions/
-Stats_URI = "jsonSimStats"
-
-[Network]
-http_listener_port = $3" >> $OpenSim_Land/$RegionNameFileSys/OpenSim.ini
-
+mkdir $OpenSim_Land/$RegionNameFileSys
+mkdir  $OpenSim_Land/$RegionNameFileSys/Regions
+touch  $OpenSim_Land/$RegionNameFileSys/OpenSim.ini
 touch  $OpenSim_Land/$RegionNameFileSys/OpenSim.exe.config
-
-echo "<?xml version="1.0" encoding="utf-8" ?>
-<configuration>
-  <configSections>
-    <section name="log4net" type="log4net.Config.Log4NetConfigurationSectionHandler,log4net" />
-  </configSections>
-  <runtime>
-    <gcConcurrent enabled="true" />
-        <gcServer enabled="true" />
-  </runtime>
-  <appSettings>
-  </appSettings>
-  <log4net>
-    <appender name="Console" type="OpenSim.Framework.Console.OpenSimAppender, OpenSim.Framework.Console">
-      <layout type="log4net.Layout.PatternLayout">
-        <conversionPattern value="%date{HH:mm:ss} - %message" />
-        <!-- console log with milliseconds.  Useful for debugging -->
-<!--        <conversionPattern value="%date{HH:mm:ss.fff} - %message" /> -->
-      </layout>
-    </appender>
-
-<appender name="RollingFileAppender" type="log4net.Appender.RollingFileAppender">
-  <file value=$OpenSim_Log/$RegionName.log />
-  <appendToFile value="true" />
-  <maximumFileSize value="1000KB" />
-  <maxSizeRollBackups value="2" />
-  <layout type="log4net.Layout.PatternLayout">
-    <conversionPattern value="%date %-5level - %logger %message%newline" />
-  </layout>
-</appender>
-
-    <root>
-      <level value="DEBUG" />
-      <appender-ref ref="Console" />
-      <appender-ref ref="RollingFileAppender" />
-    </root>
-
-    <!-- Independently control logging level for XEngine -->
-    <logger name="OpenSim.Region.ScriptEngine.XEngine">
-      <level value="INFO"/>
-    </logger>
-
-    <!-- Independently control logging level for per region module loading -->
-    <logger name="OpenSim.ApplicationPlugins.RegionModulesController.RegionModulesControllerPlugin">
-      <level value="INFO"/>
-    </logger>
-
-  </log4net>
-</configuration>" >> $OpenSim_Land/$RegionNameFileSys/OpenSim.exe.config
-
 touch  $OpenSim_Land/$RegionNameFileSys/Regions/Regions.ini
 
-echo "[$RegionName]
-RegionUUID = $UUID
-Location = $4
-InternalAddress = 0.0.0.0
-InternalPort = $3
-AllowAlternatePorts = False
-ExternalHostName = SYSTEMIP
-RegionType = "Mainland"
-MaxPrims = 45000
-MaxAgents = 40" >> $OpenSim_Land/$RegionNameFileSys/Regions/Regions.ini
+tmpl/./opensim.ini.tmpl
+tmpl/./opensim.exe.config.tmpl
+tmpl/./regions.ini.tmpl
 
 echo "$Coordinates" >> data/coordinates.txt
 echo "$Port" >> data/ports.txt
 echo "$RegionName" >> data/land.txt
 echo "$Date: $RegionName $RegionNameFileSys $Coordinates $Port" >> data/regioninfo.txt
+
+unset RegionName
+unset RegionNameFileSys
+unset Port
+unset Coordinates
+unset UUID
+unset OpenSim_Pid
+unset Opensim_Land
+unset OpenSim_Log
+
 
 					fi
 				else
