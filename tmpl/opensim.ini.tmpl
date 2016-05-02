@@ -1,9 +1,12 @@
 #!/bin/bash
 
 echo "[Startup]
-PIDFile = \"$OpenSim_Pid\"
+PIDFile = \"$OpenSim_Pid/$RegionNameFileSys.pid\"
 regionload_regionsdir = \"$OpenSim_Land/$RegionNameFileSys/Regions/\"
 Stats_URI = \"jsonSimStats\"
 
 [Network]
-http_listener_port = $Port" >> $OpenSim_Land/$RegionNameFileSys/OpenSim.ini
+http_listener_port = $Port
+
+[WebStats]
+enabled=true" >> $OpenSim_Land/$RegionNameFileSys/OpenSim.ini
