@@ -30,7 +30,7 @@ do
 done
  
 show_help() {
-    echo "Input: opensim {start|stop|open|restart|console} "
+    echo "Input: opensim {start|stop|open|restart|console|list} "
     echo -n "    for following Regions: "
     echo ${!instances[*]}
 }
@@ -140,7 +140,7 @@ case "$1" in
         ;;
     open)
     do_open $2
-;;
+        ;;
     kill)
         do_kill $2
         ;;
@@ -151,6 +151,9 @@ case "$1" in
     console)
         do_console $2
         ;;
+    list)
+	echo $AvailableRegions
+	;;
     *)
         show_help
         exit
