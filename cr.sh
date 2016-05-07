@@ -104,8 +104,21 @@ tmpl/./regions.ini.tmpl
 read -p "Would you like the new Region to be added to the monitoring system (y/n)? " response
 if [ "$response" == "y" ]; then
 	tmpl/./add_region_monitoring.tmpl
+
+        echo ""
+        echo "Monitoring installed!"
+        echo ""
+	echo "Please use systemctl restart monit.service to let new setings become active"
+        echo "*************************************************************************************"
+	echo "***  NOTE: this will restart all regions currently monitored and will though out  ***"
+	echo "***  potential visitors/avatars                                                   ***"
+        echo "*************************************************************************************"
+	echo ""
+
 else
-	echo "Monitoring not installed!"
+	echo ""
+	echo "Monitoring NOT installed!"
+	echo ""
 fi
 
 # ask, if OAR backup should be activated for the new region
