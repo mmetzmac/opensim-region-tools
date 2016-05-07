@@ -7,6 +7,7 @@
  
 # Original code by Dave Coyle (http://coyled.com)
 # Tweaks by Gwyneth Llewelyn (http://gwynethllewelyn.net/)
+#
 # Again tweaked by Markus Metzmacher (http://www.3dgrid.de) 
 # Requires bash 4
  
@@ -17,8 +18,13 @@
 #  an unique identification for each
  
 # List of valid instances. Make sure you add all of your instances here
+
+# the file data/regions.dta is automatically amended when a new region is created!
+FILE=data/regions.dta
+AvailableRegions=`cat $FILE`
+
 declare -A instances
-for index in dune-1 dune-2 dune-3 dune-4 dune-water 3dgrid
+for index in $AvailableRegions
 do
         instances[$index]=1
 done

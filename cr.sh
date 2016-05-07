@@ -25,6 +25,7 @@ export OpenSim_Land
 export OpenSim_Log
 export OpenSim_Oar
 export Monit_Conf
+export Monit_In_Active
 export OAR_Dir
 export Tools_Path
 export OpenSim_User
@@ -120,6 +121,7 @@ echo "$Coordinates" >> data/coordinates.txt
 echo "$Port" >> data/ports.txt
 echo "$RegionName" >> data/land.txt
 echo "$Date: $RegionName $RegionNameFileSys $Coordinates $Port" >> data/regioninfo.txt
+echo "$RegionNameFileSys" >> data/regions.dta
 
 # unset all variables
 unset RegionName
@@ -132,6 +134,7 @@ unset Opensim_Land
 unset OpenSim_Log
 unset OpenSim_Oar
 unset Monit_Conf
+unset Monit_In_Active
 unset OAR_Dir
 unset Tools_Path
 unset OpenSim_User
