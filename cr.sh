@@ -42,12 +42,21 @@ list)
 create)
 
 # Specify the Port (UDP and TCP on one and the same Port
+clear
+echo "**************************************************************"
+echo "***                                                        ***"
+echo "***     now asking son questions and doing some checks     ***"
+echo "***                                                        ***"
+echo "**************************************************************"
+
 read -p "Please input the Port to be uses (i.E.: 9000): " Port
 if grep $Port data/ports.dta > /dev/null
 then
+	echo ""
 	echo "Port already in use. ABORTING"
 	exit
 else
+	echo ""
 	echo "Will use Port $Port for region $RegionName"
 	export Port
 fi
@@ -56,25 +65,33 @@ fi
 read -p "Please input the coordinates to be used (i.E. 4000,4000): " Coordinates
 if grep $Coordinates data/coordinates.dta > /dev/null
 then
+	echo ""
         echo "Coordinates already in use. ABORTING"
         exit
 else
-        echo "Will use $Coordinates for region $RegionName. Please ensure that these coordinates are free in the grid!"
+        echo ""
 	echo "Now checking if the coordinates are in the list provided by the Grid owner (allowed coordinates)"
 	if grep $Coordinates data/allowed_coordinates.dta > /dev/null
 	then
+		echo ""
 		echo "Coordinates are in the whitelist. Will use $Coordinates for region $RegionName."
 		export Coordinates
 	else
-		echo "Coordinates are not allowed by the Grid owner. ABORTING!"
+		echo ""
+		echo "Coordinates are not allowed by the Grid owner!"
+		echo "please add coordinates to data/allowed_coordinates.dta or"
+		echo "if you are not the grid admin, ask the owner of the grid to"
+		echo "provide a file with valid coordinates"
+		echo ""
+		echo "ABORTING"
 		exit
 	fi
 fi
 
 echo ""
-echo "**********************************************"
-echo "***********     REGION CREATOR     ***********"
-echo "**********************************************"
+echo "************************************************************"
+echo "***                     REGION CREATOR                   ***"
+echo "************************************************************"
 echo ""
 echo "The new Regioon will be named: $RegionName"
 echo ""
@@ -110,9 +127,9 @@ else
 	echo ""
         echo "$OpenSim_Land/$RegionNameFileSys will be created in $OpenSim_Land"
         echo "Region will be found by searching $RegionName in Opensimulatior Viewer"
-        echo "Please remember to add the Name $RegionNameFileSys to the instances section of"
-	echo "/home/opensim/bin/os scripts"
-	echo ""
+        echo "NOTE: if you have enabled monitoring, the region will atart"
+	echo "automatically if you restart the monit service. Otherwise start"
+	echo "the new region with the command ./os.sh start <RegionName>"
 
 # create the directories and touch the necessary files
 mkdir $OpenSim_Land/$RegionNameFileSys
