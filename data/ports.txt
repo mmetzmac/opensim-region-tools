@@ -1,5 +1,0 @@
-# this file should contain free and used ports
-# format: 
-# for used ports: 9000 RegionName
-# for free ports: 9001
-

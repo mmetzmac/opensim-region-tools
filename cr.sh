@@ -11,8 +11,6 @@ Date=`date +"%d.%m.%Y - %H:%M"`
 UUID=$(uuidgen)
 RegionName=$2
 RegionNameFileSys=${RegionName,,}
-#Port=$3
-#Coordinates=$4
 
 #export needed variables for use by the sub programs
 export RegionName
@@ -45,7 +43,7 @@ create)
 
 # Specify the Port (UDP and TCP on one and the same Port
 read -p "Please input the Port to be uses (i.E.: 9000): " Port
-if grep $Port data/ports.txt > /dev/null
+if grep $Port data/ports.dta > /dev/null
 then
 	echo "Port already in use. ABORTING"
 	exit
@@ -56,13 +54,21 @@ fi
 
 # Specify the region coordinates in the grid
 read -p "Please input the coordinates to be used (i.E. 4000,4000): " Coordinates
-if grep $Coordinates data/coordinates.txt > /dev/null
+if grep $Coordinates data/coordinates.dta > /dev/null
 then
         echo "Coordinates already in use. ABORTING"
         exit
 else
         echo "Will use $Coordinates for region $RegionName. Please ensure that these coordinates are free in the grid!"
-	export Coordinates
+	echo "Now checking if the coordinates are in the list provided by the Grid owner (allowed coordinates)"
+	if grep $Coordinates data/allowed_coordinates.dta > /dev/null
+	then
+		echo "Coordinates are in the whitelist. Will use $Coordinates for region $RegionName."
+		export Coordinates
+	else
+		echo "Coordinates are not allowed by the Grid owner. ABORTING!"
+		exit
+	fi
 fi
 
 echo ""
@@ -150,10 +156,10 @@ else
 fi
 
 # store parameter into corresponding files
-echo "$Coordinates" >> data/coordinates.txt
-echo "$Port" >> data/ports.txt
-echo "$RegionName" >> data/land.txt
-echo "$Date: $RegionName $RegionNameFileSys $Coordinates $Port" >> data/regioninfo.txt
+echo "$Coordinates" >> data/coordinates.dta
+echo "$Port" >> data/ports.dta
+echo "$RegionName" >> data/land.dta
+echo "$Date: $RegionName $RegionNameFileSys $Coordinates $Port" >> data/regioninfo.dta
 echo "$RegionNameFileSys" >> data/regions.dta
 
 # unset all variables

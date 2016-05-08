@@ -1,3 +1,0 @@
-#Date Region RegenNameFileSys Coordinates Port
-29.04.2016: Semester-1-2016-1 semester-1-2016-1 7200,7200 19060
-
