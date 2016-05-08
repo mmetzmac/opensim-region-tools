@@ -11,14 +11,12 @@ Date=`date +"%d.%m.%Y - %H:%M"`
 UUID=$(uuidgen)
 RegionName=$2
 RegionNameFileSys=${RegionName,,}
-Port=$3
-Coordinates=$4
+#Port=$3
+#Coordinates=$4
 
 #export needed variables for use by the sub programs
 export RegionName
 export RegionNameFileSys
-export Port
-export Coordinates
 export UUID
 export OpenSim_Pid
 export OpenSim_Land
@@ -44,6 +42,28 @@ list)
 
 # create new region with all needed files and entries in monitoring setup
 create)
+
+# Specify the Port (UDP and TCP on one and the same Port
+read -p "Please input the Port to be uses (i.E.: 9000): " Port
+if grep $Port data/ports.txt > /dev/null
+then
+	echo "Port already in use. ABORTING"
+	exit
+else
+	echo "Will use Port $Port for region $RegionName"
+	export Port
+fi
+
+# Specify the region coordinates in the grid
+read -p "Please input the coordinates to be used (i.E. 4000,4000): " Coordinates
+if grep $Coordinates data/coordinates.txt > /dev/null
+then
+        echo "Coordinates already in use. ABORTING"
+        exit
+else
+        echo "Will use $Coordinates for region $RegionName. Please ensure that these coordinates are free in the grid!"
+	export Coordinates
+fi
 
 echo ""
 echo "**********************************************"
@@ -171,9 +191,9 @@ echo "************************************************************"
 echo "***********         OpenSim TOOLS - HELP         ***********"
 echo "************************************************************"
 echo ""
-echo "use: ./cr.sh <option> <regionname> <port> <coordinates>"
+echo "use: ./cr.sh <option> <regionname>"
 echo ""
-echo "EXAMPLE: ./cr.sh create Semester-1-2016-1 19060 7200,7200"
+echo "EXAMPLE: ./cr.sh create Semester-1-2016-1"
 echo ""
 echo "there are following options:"
 echo "1: create - creates a new region"
