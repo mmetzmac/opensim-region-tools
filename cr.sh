@@ -1,4 +1,9 @@
 #!/bin/bash
+# Developed by Markus Metzmacher | 3DGrid
+# 04/05 2016
+# Version Local-V1.0
+# Source on git@bitbucket.org:mmetzmac/opensim-region-tools.git
+# Ask info@3dgrid.de to get involved
 
 # Script to create regions
 # more descriptions here
@@ -12,7 +17,7 @@ UUID=$(uuidgen)
 RegionName=$2
 RegionNameFileSys=${RegionName,,}
 
-#export needed variables for use by the sub programs
+# export needed variables for use by the sub programs
 export RegionName
 export RegionNameFileSys
 export UUID
@@ -71,6 +76,8 @@ then
 else
         echo ""
 	echo "Now checking if the coordinates are in the list provided by the Grid owner (allowed coordinates)"
+	
+	# Read the whitelist for valid coordinates
 	if grep $Coordinates data/allowed_coordinates.dta > /dev/null
 	then
 		echo ""
