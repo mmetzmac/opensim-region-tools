@@ -4,24 +4,31 @@
 #
 # see ../README for setup instructions.
 #
- 
+#
 # Original code by Dave Coyle (http://coyled.com)
 # Tweaks by Gwyneth Llewelyn (http://gwynethllewelyn.net/)
-#
 # Again tweaked by Markus Metzmacher (http://www.3dgrid.de) 
 # Requires bash 4
- 
+#
 # The original script assumed that you‘d be running one sim per instance,
-#  and launch a different script per sim.
+# and launch a different script per sim.
 # These changes assume you have multiple instances with multiple sims,
-#  and that instance names are launched all from the same place with
-#  an unique identification for each
- 
-# List of valid instances. Make sure you add all of your instances here
-
+# and that instance names are launched all from the same place with
+# an unique identification for each
+#
+# now set to version 1.2
+#
 # the file data/regions.dta is automatically amended when a new region is created!
+# If you don't use the 3DGrid cr (create Region) script, just add the new region manually after the last line 
+# in the file data/regions.dta!
+
+# tell the program, where your bin folder is located - otherwise restart of a region through monit will fail!
+cd /home/opensim/bin
+
+# Read the file, where all the regions are listed
 FILE=data/regions.dta
 AvailableRegions=`cat $FILE`
+export AvailableRegions
 
 declare -A instances
 for index in $AvailableRegions
