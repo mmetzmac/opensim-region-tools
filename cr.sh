@@ -4,9 +4,20 @@
 # Version Local-V1.0
 # Source on git@bitbucket.org:mmetzmac/opensim-region-tools.git
 # Ask info@3dgrid.de to get involved
+# tested on CentOs 7.2
 
-# Script to create regions
-# more descriptions here
+# Script to create OpenSimulator regions
+# Features:
+# creates the region folder, OpenSim.ini, OpenSim.exe.config, Regions.ini
+# inserts port and coordinate information by use of wight- and blacklist
+# automatically assignes an UUID to a new region
+# allows to activate OAR backup automatically
+# allows the creation of monit monitoring parameter 
+
+# ToDo
+# enhance with delete region and deactivate region functionallity
+# enable the possibillity running with Linux dialog
+
 
 # read the configuration file
 source config/reg.cfg
