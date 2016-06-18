@@ -1,7 +1,0 @@
-# List of allowed coordinates in the Grid
-# if not specified by the Grid Admin, grap some free coordinates
-# your self and add them here
-
-7200,7200
-7200,7201
-7199,7200
