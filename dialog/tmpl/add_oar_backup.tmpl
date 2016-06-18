@@ -1,0 +1,11 @@
+#!/bin/bash
+
+echo "
+[AutoBackupModule]
+AutoBackupModuleEnabled = true
+AutoBackup = true
+AutoBackupNaming = time
+AutoBackupInterval = 2880
+AutoBackupSkipAssets = false
+AutoBackupKeepFilesForDays = 20
+AutoBackupDir = $OpenSim_Oar" >> $OpenSim_Land/$RegionNameFileSys/OpenSim.ini

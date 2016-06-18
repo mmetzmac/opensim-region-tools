@@ -1,0 +1,12 @@
+#!/bin/bash
+
+echo "[$RegionName]
+RegionUUID = $UUID
+Location = $Coordinates
+InternalAddress = 0.0.0.0
+InternalPort = $Port
+AllowAlternatePorts = False
+ExternalHostName = SYSTEMIP
+RegionType = \"Mainland\"
+MaxPrims = 45000
+MaxAgents = 40" >> $OpenSim_Land/$RegionNameFileSys/Regions/Regions.ini
