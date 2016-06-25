@@ -27,42 +27,26 @@ version() {
            --msgbox "$PN - Version $VER\nOpenSimulator Management Interface\nProgrammed by Markus Metzmacher\nJune 2016\n\nusing:\n$DVER" 15 52
 }
 
-edit_env() {
+edit() {
     filename="config/reg.cfg"
+    filenameTMP=$filename.tmp
     if [ -e $filename ]; then
-#        dialog --backtitle "Edit configuration file - use [up] [down] to scroll"\
-#               --begin 3 5 --title " viewing File: $filename "\
-#               --editbox $filename 22 80 2> {out}>&1
-        $editor $filename
+        cp $filename $filenameTMP
+        dialog --backtitle "Edit configuration file - use [up] [down] to scroll"\
+               --begin 3 5 --title " viewing File: $filenameTMP "\
+               --stdout --editbox $filenameTMP 22 80 > $filename
+        rm $filenameTMP
+#        $editor $filename
     else
         dialog --msgbox "*** ERROR ***\n$filename does not exist" 6 42
     fi
-}
-
-config_menu(){
- dialog --backtitle "OpenSimulator Management Interface" --title " Edit System configuration"\
-        --cancel-label "Back" \
-        --menu "Move using [UP] [DOWN], [Enter] to select" 20 80 13\
-        Environment "Edit configuration for your OpenSimulator Setup"\
-        ShowEnvironment "Create new Region "\
-        Back "go to main menu"  2>$_temp_config
-        opt2=${?}
-
-    if [ $opt2 != 0 ]; then rm $_temp_config; exit; fi
-    menuitem_config=`cat $_temp_config`
-    echo "menu_config=$menuitem_config"
-    case $menuitem_config in
-        Environment) edit_env;;
-        ShowEnvironment) show_env;;
-        Back) rm $_temp_config; main_menu;;
-    esac
 }
 
 main_menu() {
     dialog --backtitle "OpenSimulator Management Interface" --title " Main Menu - V. $VER "\
         --cancel-label "Quit" \
         --menu "Move using [UP] [DOWN], [Enter] to select" 20 80 13\
-        Config "Edit configuration for your OpenSimulator Setup"\
+        EditConfig "Edit configuration for your OpenSimulator Setup"\
         New "Create new Region "\
         Delete "Delete a Region"\
         AddOAR "Add OAR Backup for a certain Region"\
@@ -83,7 +67,7 @@ main_menu() {
     menuitem=`cat $_temp`
     echo "menu=$menuitem"
     case $menuitem in
-        Config) config_menu;;
+        EditConfig) edit;;
         Gauge) gauge;;
         File) file_select;;
         Home_Menu) file_menu;;
