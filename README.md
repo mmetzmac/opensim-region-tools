@@ -1,2 +1,3 @@
 OpenSimulator Management Console
-Added Hook on Bictbucket to update Redmine
+
+A full description will follow later. At the moment, there is now release candidate.
