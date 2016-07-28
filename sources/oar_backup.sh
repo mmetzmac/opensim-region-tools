@@ -8,6 +8,9 @@
 # FTPUSER=ftpusername
 # FTPPASS=ftppassword
 
+# change to concider reg.cfg
+# files backup mus be changed
+
 # this is a list of directories you want backed up. No trailing / needed.
 INCLUDES="/srv/backup/oar"
 
