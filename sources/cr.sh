@@ -20,7 +20,10 @@
 
 
 # read the configuration file
-source config/reg.cfg
+# use reg.cfg for production environment
+# or reg_test.cfg for test environment
+
+source config/reg_test.cfg # currently setup for test environment!
 
 # add some more needed variables
 Date=`date +"%d.%m.%Y - %H:%M"`
